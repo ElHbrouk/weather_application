@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/providers/weather_provider.dart';
 import 'package:weather_app/screens/search_screen.dart';
+import 'package:weather_app/models/weather_model.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  WeatherModel? weatherData;
+  @override
   Widget build(BuildContext context) {
+    weatherData = Provider.of<WeatherProvider>(context).weatherData;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -23,11 +33,79 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const Center(
-        child: Text(
-          'this is a weather app',
-        ),
-      ),
+      body: weatherData == null
+          ? const Center(
+              child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Text(
+                  'there is no weather 😥 start searching now 🔍',
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              ),
+            )
+          : Container(
+              color: Colors.orange,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Spacer(
+                    flex: 3,
+                  ),
+                  Text(
+                    'cairo',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'updated:  12:11 PM',
+                  ),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/images/clear.png'),
+                      Text(
+                        weatherData!.temp.toInt().toString(),
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            'max:${weatherData!.maxTemp.toInt()}',
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                          ),
+                          Text(
+                            'min:${weatherData!.minTemp.toInt()}',
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Text(
+                    weatherData!.weatherStateName,
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Spacer(
+                    flex: 5,
+                  ),
+                ],
+              ),
+            ),
     );
   }
 }

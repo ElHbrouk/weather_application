@@ -46,7 +46,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             )
           : Container(
-              color: Colors.orange,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    weatherData!.getThemeColor(),
+                    weatherData!.getThemeColor()[300]!,
+                    weatherData!.getThemeColor()[100]!,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -54,20 +64,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     flex: 3,
                   ),
                   Text(
-                    'cairo',
+                    Provider.of<WeatherProvider>(context).cityName!,
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'updated:  12:11 PM',
+                    'updated at : ${weatherData!.date.hour.toString()}:${weatherData!.date.minute.toString()}',
                   ),
                   Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset('assets/images/clear.png'),
+                      Image.asset(weatherData!.getImage()),
                       Text(
                         weatherData!.temp.toInt().toString(),
                         style: TextStyle(

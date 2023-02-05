@@ -5,7 +5,7 @@ import 'package:weather_app/screens/search_screen.dart';
 import 'package:weather_app/models/weather_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -60,12 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Spacer(
+                  const Spacer(
                     flex: 3,
                   ),
                   Text(
                     Provider.of<WeatherProvider>(context).cityName!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
@@ -73,14 +73,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     'updated at : ${weatherData!.date.hour.toString()}:${weatherData!.date.minute.toString()}',
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Image.asset(weatherData!.getImage()),
                       Text(
                         weatherData!.temp.toInt().toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                         ),
                       ),
@@ -88,13 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             'max:${weatherData!.maxTemp.toInt()}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 10,
                             ),
                           ),
                           Text(
                             'min:${weatherData!.minTemp.toInt()}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 10,
                             ),
                           ),
@@ -102,15 +102,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     weatherData!.weatherStateName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(
+                  const Spacer(
                     flex: 5,
                   ),
                 ],
